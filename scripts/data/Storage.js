@@ -62,6 +62,10 @@ class Storage {
     this.#developers.push(developer);
   }
 
+  updateDeveloper(legacyDeveloperId, newDeveloper) {
+    this.#developers.splice(legacyDeveloperId, 1, newDeveloper);
+  }
+
   getDevelopers() {
     return this.#developers;
   }

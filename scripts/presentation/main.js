@@ -12,17 +12,16 @@
     [any other input] - Exit
     `);
 
-    if (userMenuInput < 1 || userMenuInput > 3) break;
+    handleMenu(userMenuInput, storage);
 
-    let developer = getDeveloperFromInput();
-    storage.addDeveloper(developer);
   } while (userMenuInput >= 1 && userMenuInput <= 3);
 
   //test storage
-  let languages = storage.getDevelopers();
-  languages.forEach((dev) => {
+  let devs = storage.getDevelopers();
+  devs.forEach((dev) => {
     console.log(`${dev.fullName} - ${dev.developerType} - ${dev.jobStatus}`);
   });
 
   alert(`Thank you for using our browsing engine!`);
 })();
+

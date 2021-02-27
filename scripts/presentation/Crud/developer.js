@@ -14,10 +14,9 @@ function handleUpdateDeveloper(storage) {
   }
 
   const newDeveloper = Object.assign({}, legacyDeveloper, {
-    jobStatus: getInputForProperty("jobStatus") ?? legacyDeveloper.jobStatus,
-    company: getInputForProperty("company") ?? legacyDeveloper.company,
-    developerType:
-      getInputForProperty("developerType") ?? legacyDeveloper.developerType,
+    jobStatus: getInputForProperty("jobStatus"),
+    company: getInputForProperty("company"),
+    developerType: getInputForProperty("developerType"),
   });
 
   storage.updateDeveloper(developerId, newDeveloper);

@@ -7,10 +7,10 @@ function getProgrammingLanguageFromInput() {
 function getDeveloperFromInput() {
   return {
     fullName: sanitizeName(getInputForProperty("name")),
-    jobStatus: getInputForProperty("jobStatus"),
+    //employmentStatus: getEmploymentStatusFromInput("employmentStatus"),
     company: getInputForProperty("company"),
-    developerType: getInputForProperty("developerType"),
-    pero: getInputForProperty("programmingLanguages")
+    developerType: getDeveloperTypeFromInput("developerType"),
+    pero: getInputForProperty("programmingLanguages"),
   };
 }
 
@@ -19,6 +19,12 @@ function getCompanyFromInput() {
     getInputForProperty("name"),
     getInputForProperty("employees")
   );
+}
+
+function getDeveloperTypeFromInput() {
+  const allDeveloperTypes = Object.keys(developerType).join(", ");
+  return prompt(`Choose dev type for developer:
+  [${allDeveloperTypes}]`);
 }
 
 function getInputForProperty(propertyName) {

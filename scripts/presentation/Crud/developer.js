@@ -2,9 +2,9 @@ function handleCreateDeveloper(storage) {
   const newDeveloper = {
     fullName: sanitizeName(getInputForProperty("name")),
     employmentStatus: getEmploymentStatusFromInput(),
-    company: getInputForProperty("company"),
+    company: getInputtedCompany(storage.getCompanies()),
     developerType: getDeveloperTypeFromInput(),
-    programmingLanguages: getInputForProperty("programmingLanguages"),
+    programmingLanguages: getInputtedLanguages(storage.getProgrammingLanguages()),
   };
 
   storage.addDeveloper(newDeveloper);

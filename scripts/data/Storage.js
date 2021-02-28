@@ -1,85 +1,24 @@
 "use strict";
 
 class Storage {
-  #developers = [
-    {
-      fullName: "Alex Amanzi",
-      employmentStatus: employmentStatus["FREELANCER"],
-      company: "Dump",
-      developerType: developerType["FULLSTACK"],
-      programmingLanguages: ["C#", "JS"],
-    },
-    {
-      fullName: "Matija Luketin",
-      employmentStatus: employmentStatus["EMPLOYED"],
-      company: "CompanyA",
-      developerType: developerType["FRONTEND"],
-      programmingLanguages: ["WebAssembly", "JS", "Sass"],
-    },
-    {
-      fullName: "Ante Vuletić",
-      employmentStatus: employmentStatus["EMPLOYED"],
-      company: "Dump",
-      developerType: developerType["BACKEND"],
-      programmingLanguages: ["C#", "Java", "JS", "Python", "C++"],
-    },
-    {
-      fullName: "Duje Šarić",
-      employmentStatus: employmentStatus["UNEMPLOYED"],
-      company: null,
-      developerType: developerType["FULLSTACK"],
-      programmingLanguages: ["PHP", "JS"],
-    },
-  ];
-
-  #programmingLanguages = [
-    {
-      name: "JavaScript",
-    },
-    {
-      name: "WebAssembly",
-    },
-    {
-      name: "C#",
-    },
-    {
-      name: "PHP",
-    },
-    {
-      name: "Java",
-    },
-    {
-      name: "C++",
-    },
-    {
-      name: "Python",
-    },
-    {
-      name: "Sass",
-    },
-  ];
-
-  #companies = [
-    {
-      name: "Dump",
-      employees: [1, 3],
-    },
-    {
-      name: "CompanyA",
-      employees: [2],
-    },
-    {
-      name: "CompanyBankrupt",
-      employees: [],
-    },
-  ];
+  #developers = [];
+  #lastDeveloperId = 0;
+  #programmingLanguages = [];
+  #lastProgrammingLanguageId = 0;
+  #companies = [];
+  #lastCompanyId = 0;
 
   addDeveloper(developer) {
-    this.#developers.push(developer);
+    const newDevId = this.#lastDeveloperId++;
+
+    this.#developers.push({ id: newDevId, developer: developer });
   }
 
   updateDeveloper(legacyDeveloperId, newDeveloper) {
-    this.#developers.splice(legacyDeveloperId, 1, newDeveloper);
+    const legacyDeveloperData = this.#developers.find(
+      (developerData) => developerData.id == legacyDeveloperId
+    );
+    legacyDeveloperData.developer = newDeveloper;
   }
 
   getDevelopers() {
@@ -87,18 +26,23 @@ class Storage {
   }
 
   addProgrammingLanguage(programmingLanguage) {
-    this.#programmingLanguages.push(programmingLanguage);
+    const newLanguageId = this.#lastProgrammingLanguageId++;
+
+    this.#programmingLanguages.push({
+      id: newLanguageId,
+      programmingLanguage: programmingLanguage,
+    });
   }
 
   updateProgrammingLanguage(
     legacyProgrammingLanguageId,
     newProgrammingLanguage
   ) {
-    this.#programmingLanguages.splice(
-      legacyProgrammingLanguageId,
-      1,
-      newProgrammingLanguage
+    const legacyProgrammingLanguageData = this.#programmingLanguages.find(
+      (programmingLanguageData) =>
+        programmingLanguageData.id == legacyProgrammingLanguageId
     );
+    legacyProgrammingLanguageData.programmingLanguage = newProgrammingLanguage;
   }
 
   getProgrammingLanguages() {
@@ -106,11 +50,16 @@ class Storage {
   }
 
   addCompany(company) {
-    this.#companies.push(company);
+    const newCompanyId = this.#lastCompanyId++;
+
+    this.#companies.push({ id: newCompanyId, company: company });
   }
 
   updateCompany(legacyCompanyId, newCompany) {
-    this.#companies.splice(legacyCompanyId, 1, newCompany);
+    const legacyCompanyData = this.#companies.find(
+      (companyData) => companyData.id == legacyCompanyId
+    );
+    legacyCompanyData.company = newCompany;
   }
 
   getCompanies() {

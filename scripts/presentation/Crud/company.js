@@ -9,15 +9,19 @@ function handleCreateCompany(storage) {
 
 function handleUpdateCompany(storage) {
   companyId = getInputForProperty("id");
-  const legacyCompany = storage.getCompanies()[companyId];
+  const legacyCompanyData = storage
+    .getCompanies()
+    .find((companyData) => companyId == companyData.id);
 
-  if (!legacyCompany) {
+  if (!legacyCompanyData) {
     displayMessage(`Company with id: ${companyId} was not found!`);
 
     return;
   }
 
-  const newCompany = Object.assign({}, legacyCompany, {
+  const { id, company } = legacyCompanyData;
+
+  const newCompany = Object.assign(company, {
     name: getInputForProperty("company"),
     //developers: getDeveloperTypeFromInput(),
   });

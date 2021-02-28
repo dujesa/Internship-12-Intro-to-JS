@@ -8,11 +8,14 @@ function handleCreateProgrammingLanguage(storage) {
 
 function handleUpdateProgrammingLanguage(storage) {
   programmingLanguageId = getInputForProperty("id");
-  const legacyProgrammingLanguage = storage.getDevelopers()[
-    programmingLanguageId
-  ];
+  const legacyProgrammingLanguageData = storage
+    .getProgrammingLanguages()
+    .find(
+      (programmingLanguageData) =>
+        programmingLanguageId == programmingLanguageData.id
+    );
 
-  if (!legacyProgrammingLanguage) {
+  if (!legacyProgrammingLanguageData) {
     displayMessage(
       `Programming language with id: ${programmingLanguageId} was not found!`
     );
@@ -20,7 +23,9 @@ function handleUpdateProgrammingLanguage(storage) {
     return;
   }
 
-  const newProgrammingLanguage = Object.assign({}, legacyProgrammingLanguage, {
+  const { id, programmingLanguage } = legacyProgrammingLanguageData;
+
+  const newProgrammingLanguage = Object.assign(programmingLanguage, {
     name: getInputForProperty("name"),
   });
 

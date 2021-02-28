@@ -12,15 +12,19 @@ function handleCreateDeveloper(storage) {
 
 function handleUpdateDeveloper(storage) {
   developerId = getInputForProperty("id");
-  const legacyDeveloper = storage.getDevelopers()[developerId];
+  const legacyDeveloperData = storage
+    .getDevelopers()
+    .find((developerData) => developerId == developerData.id);
 
-  if (!legacyDeveloper) {
+  if (!legacyDeveloperData) {
     displayMessage(`Developer with id: ${developerId} was not found!`);
 
     return;
   }
 
-  const newDeveloper = Object.assign({}, legacyDeveloper, {
+  const { id, developer } = legacyDeveloperData;
+
+  const newDeveloper = Object.assign(developer, {
     employmentStatus: getEmploymentStatusFromInput(),
     company: getInputForProperty("company"),
     developerType: getDeveloperTypeFromInput(),

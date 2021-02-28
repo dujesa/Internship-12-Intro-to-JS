@@ -1,7 +1,10 @@
 (function () {
   displayMessage("DEVELOPMENT BROWSER ENGINE");
-  let userMenuInput = 0;
+
   const storage = new Storage();
+  seedData(storage);
+
+  let userMenuInput = 0;
 
   do {
     userMenuInput = getInputForMessage(`
@@ -18,21 +21,30 @@
   //test storage
   console.log("--DEVS--");
   let devs = storage.getDevelopers();
-  devs.forEach((dev) => {
+
+  devs.forEach((developerData) => {
+    const { id, developer } = developerData;
     console.log(
-      `${dev.fullName} - ${dev.developerType} - ${dev.employmentStatus}`
+      `{${id}}: ${developer.fullName} - ${developer.developerType} - ${developer.employmentStatus}`
     );
   });
+
   console.log("--LANGUAGES--");
   let languages = storage.getProgrammingLanguages();
-  languages.forEach((language) => {
-    console.log(`${language.name}`);
+  languages.forEach((languageData) => {
+    const { id, programmingLanguage } = languageData;
+    console.log(`{${id}} - ${programmingLanguage.name}`);
   });
+
   console.log("--COMPANIES--");
   let companies = storage.getCompanies();
-  companies.forEach((company) => {
-    console.log(`${company.name}`);
+  companies.forEach((companyData) => {
+    const { id, company } = companyData;
+    console.log(`{${id}} - ${company.name}`);
   });
+
+  const foundCompanyData = companies.find((companyData) => 1 === companyData.id);
+  console.log(foundCompanyData.id + ": " + foundCompanyData.company.name)
 
   alert(`Thank you for using our browsing engine!`);
 })();

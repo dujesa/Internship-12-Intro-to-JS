@@ -4,30 +4,30 @@ class Storage {
   #developers = [
     {
       fullName: "Alex Amanzi",
-      jobStatus: "freelancer",
+      employmentStatus: employmentStatus["FREELANCER"],
       company: "Dump",
-      developerType: "fullstack",
+      developerType: developerType["FULLSTACK"],
       programmingLanguages: ["C#", "JS"],
     },
     {
       fullName: "Matija Luketin",
-      jobStatus: "employed",
+      employmentStatus: employmentStatus["EMPLOYED"],
       company: "CompanyA",
-      developerType: "frontend",
+      developerType: developerType["FRONTEND"],
       programmingLanguages: ["WebAssembly", "JS", "Sass"],
     },
     {
       fullName: "Ante Vuletić",
-      jobStatus: "employed",
+      employmentStatus: employmentStatus["EMPLOYED"],
       company: "Dump",
-      developerType: "backend",
+      developerType: developerType["BACKEND"],
       programmingLanguages: ["C#", "Java", "JS", "Python", "C++"],
     },
     {
       fullName: "Duje Šarić",
-      jobStatus: "unemployed",
+      employmentStatus: employmentStatus["UNEMPLOYED"],
       company: null,
-      developerType: "fullstack",
+      developerType: developerType["FULLSTACK"],
       programmingLanguages: ["PHP", "JS"],
     },
   ];

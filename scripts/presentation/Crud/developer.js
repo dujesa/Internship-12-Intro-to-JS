@@ -1,5 +1,12 @@
 function handleCreateDeveloper(storage) {
-  const newDeveloper = getDeveloperFromInput();
+  const newDeveloper = {
+    fullName: sanitizeName(getInputForProperty("name")),
+    employmentStatus: getEmploymentStatusFromInput(),
+    company: getInputForProperty("company"),
+    developerType: getDeveloperTypeFromInput(),
+    programmingLanguages: getInputForProperty("programmingLanguages"),
+  };
+
   storage.addDeveloper(newDeveloper);
 }
 
@@ -14,9 +21,9 @@ function handleUpdateDeveloper(storage) {
   }
 
   const newDeveloper = Object.assign({}, legacyDeveloper, {
-    jobStatus: getInputForProperty("jobStatus"),
+    employmentStatus: getEmploymentStatusFromInput(),
     company: getInputForProperty("company"),
-    developerType: getInputForProperty("developerType"),
+    developerType: getDeveloperTypeFromInput(),
   });
 
   storage.updateDeveloper(developerId, newDeveloper);

@@ -33,14 +33,30 @@ class Storage {
   ];
 
   #programmingLanguages = [
-    new ProgrammingLanguage("JS"),
-    new ProgrammingLanguage("WebAssembly"),
-    new ProgrammingLanguage("Sass"),
-    new ProgrammingLanguage("Java"),
-    new ProgrammingLanguage("C#"),
-    new ProgrammingLanguage("C++"),
-    new ProgrammingLanguage("Python"),
-    new ProgrammingLanguage("PHP"),
+    {
+      name: "JavaScript",
+    },
+    {
+      name: "WebAssembly",
+    },
+    {
+      name: "C#",
+    },
+    {
+      name: "PHP",
+    },
+    {
+      name: "Java",
+    },
+    {
+      name: "C++",
+    },
+    {
+      name: "Python",
+    },
+    {
+      name: "Sass",
+    },
   ];
 
   #companies = [
@@ -74,12 +90,27 @@ class Storage {
     this.#programmingLanguages.push(programmingLanguage);
   }
 
+  updateProgrammingLanguage(
+    legacyProgrammingLanguageId,
+    newProgrammingLanguage
+  ) {
+    this.#programmingLanguages.splice(
+      legacyProgrammingLanguageId,
+      1,
+      newProgrammingLanguage
+    );
+  }
+
   getProgrammingLanguages() {
     return this.#programmingLanguages;
   }
 
   addCompany(company) {
     this.#companies.push(company);
+  }
+
+  updateCompany(legacyCompanyId, newCompany) {
+    this.#companies.splice(legacyCompanyId, 1, newCompany);
   }
 
   getCompanies() {

@@ -16,11 +16,22 @@
   } while (userMenuInput >= 1 && userMenuInput <= 3);
 
   //test storage
+  console.log("--DEVS--");
   let devs = storage.getDevelopers();
   devs.forEach((dev) => {
     console.log(
       `${dev.fullName} - ${dev.developerType} - ${dev.employmentStatus}`
     );
+  });
+  console.log("--LANGUAGES--");
+  let languages = storage.getProgrammingLanguages();
+  languages.forEach((language) => {
+    console.log(`${language.name}`);
+  });
+  console.log("--COMPANIES--");
+  let companies = storage.getCompanies();
+  companies.forEach((company) => {
+    console.log(`${company.name}`);
   });
 
   alert(`Thank you for using our browsing engine!`);

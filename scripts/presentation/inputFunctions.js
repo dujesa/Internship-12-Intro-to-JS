@@ -1,26 +1,5 @@
 "use strict";
 
-function getProgrammingLanguageFromInput() {
-  return new ProgrammingLanguage(getInputForProperty("name"));
-}
-
-function getDeveloperFromInput() {
-  return {
-    fullName: sanitizeName(getInputForProperty("name")),
-    //employmentStatus: getEmploymentStatusFromInput("employmentStatus"),
-    company: getInputForProperty("company"),
-    developerType: getDeveloperTypeFromInput("developerType"),
-    programmingLanguages: getInputForProperty("programmingLanguages"),
-  };
-}
-
-function getCompanyFromInput() {
-  return new Company(
-    getInputForProperty("name"),
-    getInputForProperty("employees")
-  );
-}
-
 function getDeveloperTypeFromInput() {
   const developerTypes = Object.values(developerType);
   let isInputValid = false,

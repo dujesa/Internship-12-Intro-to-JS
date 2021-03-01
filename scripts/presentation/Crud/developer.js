@@ -4,7 +4,9 @@ function handleCreateDeveloper(storage) {
     employmentStatus: getEmploymentStatusFromInput(),
     company: getInputtedCompany(storage.getCompanies()),
     developerType: getDeveloperTypeFromInput(),
-    programmingLanguages: getInputtedLanguages(storage.getProgrammingLanguages()),
+    programmingLanguages: getInputtedLanguages(
+      storage.getProgrammingLanguages()
+    ),
   };
 
   storage.addDeveloper(newDeveloper);
@@ -31,4 +33,19 @@ function handleUpdateDeveloper(storage) {
   });
 
   storage.updateDeveloper(developerId, newDeveloper);
+}
+
+function handleDeleteDeveloper(storage) {
+  developerId = getInputForProperty("id");
+  const legacyDeveloperData = storage
+    .getDevelopers()
+    .find((developerData) => developerId == developerData.id);
+
+  if (!legacyDeveloperData) {
+    displayMessage(`Developer with id: ${developerId} was not found!`);
+
+    return;
+  }
+
+  storage.deleteDeveloper(developerId);
 }

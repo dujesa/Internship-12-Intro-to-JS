@@ -19,6 +19,34 @@ class Storage {
       (companyData) => companyData.id == legacyCompanyId
     );
     legacyCompanyData.company = newCompany;
+
+    this.updateCompanyInDevelopersById(legacyCompanyId, newCompany);
+  }
+
+  updateCompanyInDevelopersById(id, updatedCompany) {
+    this.#developers.forEach((developerData) => {
+      const companyData = developerData.developer.company;
+      if (companyData !== null && companyData.id == id)
+        developerData.developer.company = updatedCompany;
+    });
+  }
+
+  deleteCompany(id) {
+    const deletingCompanyIndex = this.#companies.findIndex(
+      (companyData) => companyData.id == id
+    );
+    if (deletingCompanyIndex == null) return;
+
+    this.removeCompanyFromDevelopersById(id);
+    this.#companies.splice(deletingCompanyIndex, 1);
+  }
+
+  removeCompanyFromDevelopersById(id) {
+    this.#developers.forEach((developerData) => {
+      const companyData = developerData.developer.company;
+      if (companyData !== null && companyData.id == id)
+        developerData.developer.company = null;
+    });
   }
 
   getCompanies() {
@@ -48,7 +76,8 @@ class Storage {
         ? this.getProgrammingLanguageById(programmingLanguageData.id)
         : null;
       if (legacyLanguageData) {
-        programmingLanguageData.programmingLanguage = legacyLanguageData.programmingLanguage;
+        programmingLanguageData.programmingLanguage =
+          legacyLanguageData.programmingLanguage;
 
         programmingLanguageData.programmingLanguage.developerIds.push(newDevId);
       }
@@ -62,6 +91,41 @@ class Storage {
       (developerData) => developerData.id == legacyDeveloperId
     );
     legacyDeveloperData.developer = newDeveloper;
+  }
+
+  deleteDeveloper(id) {
+    const deletingDeveloperIndex = this.#developers.findIndex(
+      (developerData) => developerData.id == id
+    );
+
+    if (!deletingDeveloperIndex) return;
+
+    this.removeDeveloperFromCompanyById(id);
+    this.removeDeveloperFromProgrammingLanguagesById(id);
+
+    this.#developers.splice(deletingDeveloperIndex, 1);
+  }
+
+  removeDeveloperFromProgrammingLanguagesById(id) {
+    this.#programmingLanguages.forEach((languageData) => {
+      const programmingLanguage = languageData.programmingLanguage;
+      const removingIndex = programmingLanguage.developerIds.indexOf(
+        parseInt(id)
+      );
+      if (removingIndex >= 0) {
+        programmingLanguage.developerIds.splice(removingIndex, 1);
+      }
+    });
+  }
+
+  removeDeveloperFromCompanyById(id) {
+    this.#companies.forEach((companyData) => {
+      const company = companyData.company;
+      const removingIndex = company.developerIds.indexOf(parseInt(id));
+      if (removingIndex >= 0) {
+        company.developerIds.splice(removingIndex, 1);
+      }
+    });
   }
 
   getDevelopers() {
@@ -92,9 +156,23 @@ class Storage {
     const deletingLanguageIndex = this.#programmingLanguages.findIndex(
       (programmingLanguageData) => programmingLanguageData.id == id
     );
+
     if (!deletingLanguageIndex) return;
 
+    this.removeProgrammingLanguageFromDevelopersById(id);
     this.#programmingLanguages.splice(deletingLanguageIndex, 1);
+  }
+
+  removeProgrammingLanguageFromDevelopersById(id) {
+    this.#developers.forEach((developerData) => {
+      const developer = developerData.developer;
+      const removingLanguageIndex = developer.programmingLanguages.findIndex(
+        (programmingLanguageData) => programmingLanguageData.id == id
+      );
+
+      if (removingLanguageIndex)
+        developer.programmingLanguages.splice(removingLanguageIndex, 1);
+    });
   }
 
   getProgrammingLanguages() {
@@ -102,6 +180,8 @@ class Storage {
   }
 
   getProgrammingLanguageById(id) {
-    return this.#programmingLanguages.find((programmingLanguageData) => programmingLanguageData.id == id);
+    return this.#programmingLanguages.find(
+      (programmingLanguageData) => programmingLanguageData.id == id
+    );
   }
 }

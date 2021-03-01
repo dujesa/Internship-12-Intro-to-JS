@@ -27,3 +27,18 @@ function handleUpdateCompany(storage) {
 
   storage.updateCompany(companyId, newCompany);
 }
+
+function handleDeleteCompany(storage) {
+  companyId = getInputForProperty("id");
+  const legacyCompanyData = storage
+    .getCompanies()
+    .find((companyData) => companyId == companyData.id);
+
+  if (!legacyCompanyData) {
+    displayMessage(`Company with id: ${companyId} was not found!`);
+
+    return;
+  }
+
+  storage.deleteCompany(companyId);
+}

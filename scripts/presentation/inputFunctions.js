@@ -60,7 +60,7 @@ function getInputtedLanguages(allLanguagesData) {
       inputtedLanguage &&
       !inputtedLanguages.includes(inputtedLanguage.programmingLanguage.name)
     )
-      inputtedLanguages.push(inputtedLanguage.programmingLanguage.name);
+      inputtedLanguages.push(inputtedLanguage);
   } while (inputtedId >= 0);
 
   return inputtedLanguages;

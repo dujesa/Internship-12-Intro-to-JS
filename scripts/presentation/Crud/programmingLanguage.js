@@ -1,6 +1,7 @@
 function handleCreateProgrammingLanguage(storage) {
   const newProgrammingLanguage = {
     name: getInputForProperty("name"),
+    developerIds: [],
   };
 
   storage.addProgrammingLanguage(newProgrammingLanguage);
@@ -33,4 +34,24 @@ function handleUpdateProgrammingLanguage(storage) {
     programmingLanguageId,
     newProgrammingLanguage
   );
+}
+
+function handleDeleteProgrammingLanguage(storage) {
+  programmingLanguageId = getInputForProperty("id");
+  const legacyProgrammingLanguageData = storage
+    .getProgrammingLanguages()
+    .find(
+      (programmingLanguageData) =>
+        programmingLanguageId == programmingLanguageData.id
+    );
+
+  if (!legacyProgrammingLanguageData) {
+    displayMessage(
+      `Programming language with id: ${programmingLanguageId} was not found!`
+    );
+
+    return;
+  }
+
+  storage.deleteProgrammingLanguage(programmingLanguageId);
 }

@@ -2,27 +2,35 @@ function seedData(storage) {
   const programmingLanguages = [
     {
       name: "JavaScript",
+      developerIds: [],
     },
     {
       name: "WebAssembly",
+      developerIds: [],
     },
     {
       name: "C#",
+      developerIds: [],
     },
     {
       name: "PHP",
+      developerIds: [],
     },
     {
       name: "Java",
+      developerIds: [],
     },
     {
       name: "C++",
+      developerIds: [],
     },
     {
       name: "Python",
+      developerIds: [],
     },
     {
       name: "Sass",
+      developerIds: [],
     },
   ];
 
@@ -33,11 +41,11 @@ function seedData(storage) {
   const companies = [
     {
       name: "Dump",
-      developerIds: [1, 3],
+      developerIds: [],
     },
     {
       name: "Google",
-      developerIds: [2],
+      developerIds: [],
     },
     {
       name: "CompanyBankrupt",
@@ -53,28 +61,28 @@ function seedData(storage) {
       employmentStatus: employmentStatus["FREELANCER"],
       company: { id: 0 },
       developerType: developerType["FULLSTACK"],
-      programmingLanguages: ["C#", "JS"],
+      programmingLanguages: [{ id: 0 }, { id: 1 }],
     },
     {
       fullName: "Matija Luketin",
       employmentStatus: employmentStatus["EMPLOYED"],
       company: { id: 1 },
       developerType: developerType["FRONTEND"],
-      programmingLanguages: ["WebAssembly", "JS", "Sass"],
+      programmingLanguages: [{ id: 0 }, { id: 1 }, { id: 3 }],
     },
     {
       fullName: "Ante Vuletić",
       employmentStatus: employmentStatus["EMPLOYED"],
       company: { id: 0 },
       developerType: developerType["BACKEND"],
-      programmingLanguages: ["C#", "Java", "JS", "Python", "C++"],
+      programmingLanguages: [{ id: 2 }, { id: 3 },  { id: 4 },  { id: 5 },  { id: 6 }],
     },
     {
       fullName: "Duje Šarić",
       employmentStatus: employmentStatus["UNEMPLOYED"],
       company: null,
       developerType: developerType["FULLSTACK"],
-      programmingLanguages: ["PHP", "JS"],
+      programmingLanguages: [ { id: 3 }],
     },
   ];
 

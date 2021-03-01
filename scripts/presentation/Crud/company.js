@@ -1,7 +1,7 @@
 function handleCreateCompany(storage) {
   const newCompany = {
     name: getInputForProperty("name"),
-    //developers: getInputForProperty("developers"),
+    developerIds: [],
   };
 
   storage.addCompany(newCompany);
@@ -23,7 +23,6 @@ function handleUpdateCompany(storage) {
 
   const newCompany = Object.assign(company, {
     name: getInputForProperty("company"),
-    //developers: getDeveloperTypeFromInput(),
   });
 
   storage.updateCompany(companyId, newCompany);

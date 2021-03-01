@@ -28,8 +28,11 @@ function handleUpdateDeveloper(storage) {
 
   const newDeveloper = Object.assign(developer, {
     employmentStatus: getEmploymentStatusFromInput(),
-    company: getInputForProperty("company"),
+    company: getInputtedCompany(storage.getCompanies()),
     developerType: getDeveloperTypeFromInput(),
+    programmingLanguages: getInputtedLanguages(
+      storage.getProgrammingLanguages()
+    ),
   });
 
   storage.updateDeveloper(developerId, newDeveloper);

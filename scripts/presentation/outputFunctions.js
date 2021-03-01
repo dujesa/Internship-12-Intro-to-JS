@@ -39,7 +39,7 @@ function handleDevelopersSubmenu(storage) {
       handleDeleteDeveloper(storage);
       break;
     case "4":
-      //handleReadDevelopers(storage);
+      handleReadDevelopers(storage);
       break;
     default:
       displayMessage("Wrong menu input!");
@@ -67,7 +67,7 @@ function handleProgrammingLanguagesSubmenu(storage) {
       handleDeleteProgrammingLanguage(storage);
       break;
     case "4":
-      //handleReadProgrammingLanguage(storage);
+      handleReadProgrammingLanguage(storage);
       break;
     default:
       displayMessage("Wrong menu input!");
@@ -95,7 +95,7 @@ function handleCompaniesSubmenu(storage) {
       handleDeleteCompany(storage);
       break;
     case "4":
-      //handleReadCompany(storage);
+      handleReadCompany(storage);
       break;
     default:
       displayMessage("Wrong menu input!");

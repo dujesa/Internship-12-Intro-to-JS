@@ -132,6 +132,49 @@ class Storage {
     return this.#developers;
   }
 
+  getDevelopersByType(type) {
+    return this.#developers.filter(
+      (developerData) => developerData.developer.developerType === type
+    );
+  }
+
+  getDevelopersByProgrammingLanguages(programmingLanguages) {
+    let developers = [];
+
+    programmingLanguages.forEach((programmingLanguageData) => {
+      const filteredDevs = this.#developers.filter((developerData) =>
+        developerData.developer.programmingLanguages.includes(
+          (developerLanguageData) =>
+            parseInt(developerLanguageData.id) ==
+            parseInt(programmingLanguageData.id)
+        )
+      );
+console.log(filteredDevs);
+      for (let index = 0; index < filteredDevs.length; index++) {
+        const filteredDev = filteredDevs[index];
+        /*if (
+          developers.includes(
+            (developerData) =>
+              parseInt(developerData.id) ===
+              parseInt(filteredDev.developerData.id)
+          )
+        )
+          continue;
+*/
+        developers.push(filteredDev);
+      }
+    });
+
+    return developers;
+  }
+
+  getDevelopersByEmploymentStatus(employmentStatus) {
+    return this.#developers.filter(
+      (developerData) =>
+        developerData.developer.employmentStatus === employmentStatus
+    );
+  }
+
   addProgrammingLanguage(programmingLanguage) {
     const newLanguageId = this.#lastProgrammingLanguageId++;
 

@@ -18,35 +18,5 @@
     handleMenu(userMenuInput, storage);
   } while (userMenuInput >= 1 && userMenuInput <= 3);
 
-  //test storage
-  console.log("--DEVS--");
-  let devs = storage.getDevelopers();
-
-  devs.forEach((developerData) => {
-    const { id, developer } = developerData;
-    console.log(
-      `{${id}}: ${developer.fullName} - ${developer.developerType} - ${developer.employmentStatus}`
-    );
-    developer.programmingLanguages.forEach((language) => console.log(language));
-    console.log(developer.company);
-  });
-
-  console.log("--LANGUAGES--");
-  let languages = storage.getProgrammingLanguages();
-  languages.forEach((languageData) => {
-    const { id, programmingLanguage } = languageData;
-    console.log(`{${id}} - ${programmingLanguage.name}`);
-  });
-
-  console.log("--COMPANIES--");
-  let companies = storage.getCompanies();
-  companies.forEach((companyData) => {
-    const { id, company } = companyData;
-    console.log(`{${id}} - ${company.name}`);
-  });
-
-  const foundCompanyData = companies.find((companyData) => 1 === companyData.id);
-  console.log(foundCompanyData.id + ": " + foundCompanyData.company.name)
-
   alert(`Thank you for using our browsing engine!`);
 })();

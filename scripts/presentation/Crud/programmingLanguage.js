@@ -55,3 +55,24 @@ function handleDeleteProgrammingLanguage(storage) {
 
   storage.deleteProgrammingLanguage(programmingLanguageId);
 }
+
+function handleReadProgrammingLanguage(storage) {
+  let languagesForDisplay = [];
+
+  languagesForDisplay = storage.getProgrammingLanguages();
+
+  if (!languagesForDisplay) {
+    displayMessage(`No languages found.`);
+
+    return;
+  }
+
+  languagesNames = languagesForDisplay.map((languageData) => {
+    return languageData.programmingLanguage
+      ? `${languageData.programmingLanguage.name} 
+    [Number of devs: ${languageData.programmingLanguage.developerIds.length} ]`
+      : null;
+  });
+
+  displayMessage(`Developers: ${languagesNames.join(", ")}`);
+}

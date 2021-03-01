@@ -42,3 +42,22 @@ function handleDeleteCompany(storage) {
 
   storage.deleteCompany(companyId);
 }
+
+function handleReadCompany(storage) {
+  let companiesForDisplay = [];
+
+  companiesForDisplay = storage.getCompanies();
+
+  if (!companiesForDisplay) {
+    displayMessage(`No companies found.`);
+
+    return;
+  }
+
+  companyNames = companiesForDisplay.map((companyData) => {
+    return companyData.company ? (`${companyData.company.name} 
+    [Number of devs: ${companyData.company.developerIds.length} ]`) : null;
+  });
+
+  displayMessage(`Developers: ${companyNames.join(", ")}`);
+}

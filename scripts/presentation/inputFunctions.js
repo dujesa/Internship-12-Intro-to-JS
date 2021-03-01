@@ -70,9 +70,7 @@ function getInputtedCompany(allCompaniesData) {
   let inputtedId = -1;
   let inputtedCompany = null;
 
-  alert(
-    "Please choose company that developer works for or leave blank:"
-  );
+  alert("Please choose company that developer works for or leave blank:");
   let allCompanies = allCompaniesData
     .map((companyData) => `${companyData.id} - ${companyData.company.name}`)
     .join(", ");
@@ -85,6 +83,14 @@ function getInputtedCompany(allCompaniesData) {
   );
 
   return inputtedCompany;
+}
+
+function getFilterType() {
+  const filterOptions = Object.values(developersFilter);
+
+  return getInputForMessage(`Please choose one of filter types: 
+  [${filterOptions.join(", ")}]
+  `);
 }
 
 function getInputForProperty(propertyName) {

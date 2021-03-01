@@ -8,8 +8,37 @@ class Storage {
   #companies = [];
   #lastCompanyId = 0;
 
+  addCompany(company) {
+    const newCompanyId = this.#lastCompanyId++;
+
+    this.#companies.push({ id: newCompanyId, company: company });
+  }
+
+  updateCompany(legacyCompanyId, newCompany) {
+    const legacyCompanyData = this.#companies.find(
+      (companyData) => companyData.id == legacyCompanyId
+    );
+    legacyCompanyData.company = newCompany;
+  }
+
+  getCompanies() {
+    return this.#companies;
+  }
+
+  getCompanyById(id) {
+    return this.#companies.find((companyData) => companyData.id == id);
+  }
+
   addDeveloper(developer) {
     const newDevId = this.#lastDeveloperId++;
+    const companyData = developer.company;
+    const legacyCompanyData = companyData ? this.getCompanyById(companyData.id) : null;
+
+    if (legacyCompanyData) {
+      companyData.company = legacyCompanyData.company;
+
+      companyData.company.developerIds.push(newDevId);
+    }
 
     this.#developers.push({ id: newDevId, developer: developer });
   }
@@ -47,22 +76,5 @@ class Storage {
 
   getProgrammingLanguages() {
     return this.#programmingLanguages;
-  }
-
-  addCompany(company) {
-    const newCompanyId = this.#lastCompanyId++;
-
-    this.#companies.push({ id: newCompanyId, company: company });
-  }
-
-  updateCompany(legacyCompanyId, newCompany) {
-    const legacyCompanyData = this.#companies.find(
-      (companyData) => companyData.id == legacyCompanyId
-    );
-    legacyCompanyData.company = newCompany;
-  }
-
-  getCompanies() {
-    return this.#companies;
   }
 }

@@ -28,7 +28,7 @@
       `{${id}}: ${developer.fullName} - ${developer.developerType} - ${developer.employmentStatus}`
     );
     developer.programmingLanguages.forEach((language) => console.log(language));
-    developer.companies.forEach((companyData) => console.log(companyData.id + ": " + companyData.company.name));
+    console.log(developer.company);
   });
 
   console.log("--LANGUAGES--");

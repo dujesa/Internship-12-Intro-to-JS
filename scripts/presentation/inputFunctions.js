@@ -69,21 +69,20 @@ function getInputtedLanguages(allLanguagesData) {
 function getInputtedCompany(allCompaniesData) {
   let inputtedId = -1;
   let inputtedCompany = null;
-  do {
-    alert(
-      "Please choose one of companies that developer works for or -1 for exit:"
-    );
-    let allCompanies = allCompaniesData
-      .map((companyData) => `${companyData.id} - ${companyData.company.name}`)
-      .join(", ");
-    inputtedId = getInputForMessage(allCompanies);
-    if (inputtedId < 0 ) break;
 
-    inputtedCompany = allCompaniesData.find(
-      (companyData) => companyData.id == inputtedId
-    );
-    console.log(inputtedCompany.company.name);
-  } while (inputtedId != -1);
+  alert(
+    "Please choose company that developer works for or leave blank:"
+  );
+  let allCompanies = allCompaniesData
+    .map((companyData) => `${companyData.id} - ${companyData.company.name}`)
+    .join(", ");
+
+  inputtedId = getInputForMessage(allCompanies);
+  if (!inputtedId) return {};
+
+  inputtedCompany = allCompaniesData.find(
+    (companyData) => companyData.id == inputtedId
+  );
 
   return inputtedCompany;
 }

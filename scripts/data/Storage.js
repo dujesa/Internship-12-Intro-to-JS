@@ -139,33 +139,20 @@ class Storage {
   }
 
   getDevelopersByProgrammingLanguages(programmingLanguages) {
-    let developers = [];
-
-    programmingLanguages.forEach((programmingLanguageData) => {
-      const filteredDevs = this.#developers.filter((developerData) =>
-        developerData.developer.programmingLanguages.includes(
-          (developerLanguageData) =>
-            parseInt(developerLanguageData.id) ==
-            parseInt(programmingLanguageData.id)
-        )
-      );
-console.log(filteredDevs);
-      for (let index = 0; index < filteredDevs.length; index++) {
-        const filteredDev = filteredDevs[index];
-        /*if (
-          developers.includes(
-            (developerData) =>
-              parseInt(developerData.id) ===
-              parseInt(filteredDev.developerData.id)
-          )
-        )
-          continue;
-*/
-        developers.push(filteredDev);
+    return this.#developers.filter((developerData) => {
+      const developerLanguages = developerData.developer.programmingLanguages;
+      for (let index = 0; index < developerLanguages.length; index++) {
+        const developerLanguageData = developerLanguages[index];
+        
+        for (let j = 0; j < programmingLanguages.length; j++) {
+          const programmingLanguageData = programmingLanguages[j];
+          
+          if (parseInt(programmingLanguageData.id) === parseInt(developerLanguageData.id)) return true;
+        }
       }
-    });
 
-    return developers;
+      return false;
+    });
   }
 
   getDevelopersByEmploymentStatus(employmentStatus) {

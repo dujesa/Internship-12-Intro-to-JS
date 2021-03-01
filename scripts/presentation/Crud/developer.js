@@ -83,8 +83,26 @@ function handleReadDevelopers(storage) {
   }
 
   developersNames = developersForDisplay.map((developerData) => {
-    return developerData.developer ? developerData.developer.fullName : null;
+    return developerData.developer
+      ? `
+    [${developerData.developer.developerType} - ${
+          developerData.developer.fullName
+        }] Languages: ${developerData.developer.programmingLanguages.reduce(
+          (accumulator, currentLanguageData) => {
+            return (
+              accumulator + currentLanguageData.programmingLanguage.name + " "
+            );
+          },
+          ""
+        )}
+         ${developerData.developer.employmentStatus} : ${
+          developerData.developer.company
+            ? developerData.developer.company.company.name
+            : "-"
+        }
+    `
+      : null;
   });
 
-  displayMessage(`Developers: ${developersNames.join(", ")}`);
+  displayMessage(`Developers: ${developersNames.join("")}`);
 }
